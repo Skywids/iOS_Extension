@@ -2,15 +2,30 @@
 //  String+App.swift
 //  Extensions
 //
-//  Created by Mac on 08/10/20.
+//  Created by Skywinds on 08/10/20.
 //
 
 import Foundation
 
 extension String {
 
+    static func className(_ aClass: AnyClass) -> String {
+        return NSStringFromClass(aClass).components(separatedBy: ".").last!
+    }
+    
     var localized: String {
         return NSLocalizedString(self, comment: "")
+    }
+    
+    var isNumeric : Bool {
+        return NumberFormatter().number(from: self) != nil
+    }
+    
+    var isValidEmail: Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: self)
     }
     
     var toSeconds: Int {
