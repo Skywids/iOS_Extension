@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UIScrollView {
+public extension UIScrollView {
 
     func setContentInsetAndScrollIndicatorInsets(_ edgeInsets: UIEdgeInsets) {
         self.contentInset = edgeInsets

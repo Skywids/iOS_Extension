@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Sequence {
+public extension Sequence {
     /// Returns an array containing, in order, the first instances of
     /// elements of the sequence that compare equally for the keyPath.
     func unique<T: Hashable>(for keyPath: KeyPath<Element, T>) -> [Element] {

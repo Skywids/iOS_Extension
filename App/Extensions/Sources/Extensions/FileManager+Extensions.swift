@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension FileManager {
+public extension FileManager {
 
     func docPath() -> String {
         return self.urls(for: .documentDirectory, in: .userDomainMask).first!.path
