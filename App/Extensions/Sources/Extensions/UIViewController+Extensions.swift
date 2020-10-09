@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
+public extension UIViewController {
     
     static var topController: UIViewController? {
         var topController: UIViewController? = UIApplication.keyWindow?.rootViewController
