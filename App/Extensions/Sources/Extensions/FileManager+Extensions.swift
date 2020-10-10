@@ -13,6 +13,10 @@ public extension FileManager {
         return self.urls(for: .documentDirectory, in: .userDomainMask).first!.path
     }
 
+    func cachesPath() -> String {
+        return self.urls(for: .cachesDirectory, in: .userDomainMask).first!.path
+    }
+    
     func removeFileIfExists(atPath path: String) {
         if fileExists(atPath: path) {
             do {
@@ -23,6 +27,31 @@ public extension FileManager {
         }
     }
 
+    func saveImageInCache(_ imageData: Data) -> URL? {
+        let groupPath = self.cachesPath() + "/images"
+        createDirectoryIfNeeded(at: groupPath)
+        
+        let filename = UUID().uuidString + ".jpeg"
+        let path = groupPath + "/" + filename
+        
+        if !fileExists(atPath: path) {
+            do {
+                let url = URL(fileURLWithPath: path)
+                try imageData.write(to: url)
+                return url
+            } catch {
+                print(error)
+            }
+        }
+        
+        return nil
+    }
+
+    func removeCacheLocalImages() {
+        let groupPath = self.cachesPath() + "/images"
+        self.removeFileIfExists(atPath: groupPath)
+    }
+    
     func saveImageInDocPath(_ imageData: Data) -> URL? {
         let groupPath = self.docPath() + "/images"
         createDirectoryIfNeeded(at: groupPath)
